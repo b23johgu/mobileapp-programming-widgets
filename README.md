@@ -1,42 +1,95 @@
 
 # Rapport
 
-**Skriv din rapport här!**
+Ändringar i activity_main.xml:
 
-_Du kan ta bort all text som finns sedan tidigare_.
-
-## Följande grundsyn gäller dugga-svar:
-
-- Ett kortfattat svar är att föredra. Svar som är längre än en sida text (skärmdumpar och programkod exkluderat) är onödigt långt.
-- Svaret skall ha minst en snutt programkod.
-- Svaret skall inkludera en kort övergripande förklarande text som redogör för vad respektive snutt programkod gör eller som svarar på annan teorifråga.
-- Svaret skall ha minst en skärmdump. Skärmdumpar skall illustrera exekvering av relevant programkod. Eventuell text i skärmdumpar måste vara läsbar.
-- I de fall detta efterfrågas, dela upp delar av ditt svar i för- och nackdelar. Dina för- respektive nackdelar skall vara i form av punktlistor med kortare stycken (3-4 meningar).
-
-Programkod ska se ut som exemplet nedan. Koden måste vara korrekt indenterad då den blir lättare att läsa vilket gör det lättare att hitta syntaktiska fel.
-
+En EditText widget med id "nyNewEdt" lades till och positionerades längst upp. 
+Styling, så som textstorlek, font, och padding lades till.
 ```
-function errorCallback(error) {
-    switch(error.code) {
-        case error.PERMISSION_DENIED:
-            // Geolocation API stöds inte, gör något
-            break;
-        case error.POSITION_UNAVAILABLE:
-            // Misslyckat positionsanrop, gör något
-            break;
-        case error.UNKNOWN_ERROR:
-            // Okänt fel, gör något
-            break;
-    }
-}
+    <EditText
+        android:id="@+id/myNewEdt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed-light"
+        android:hint="@string/write_something"
+        android:inputType="text"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:soundEffectsEnabled="true"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="0dp" />
 ```
 
-Bilder läggs i samma mapp som markdown-filen.
+ImageView elementet lades till med vidd och höjd på 300dp. Positionerades i förhållande till EditText elementet.
+```
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:contentDescription="@string/happy_corgi"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myNewEdt"
+        app:srcCompat="@drawable/corgi" />
+```
+Bilden är en drawable som skapades i Adobe Illustrator och importerades till mappen "drawable".
+[Länk till drawable](app/src/main/res/drawable-mdpi/corgi.png)
 
-![](android.png)
+Button elementet lades till med id "myButton".
+Styling som färg och padding lades till och elementet positionerades i förhållande till ImageView elementet.
+```
+<Button
+        android:id="@+id/myButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/the_button"
+        android:layout_margin="10dp"
+        android:background="@color/colorAccent"
+        android:padding="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+```
+För att göra knappen funktionell kopplades den ihop via findViewById och funktionen onClick initierades i MainActivity.java.
+När man klickar på knappen skrivs texten "You clicked the button!" i Logcat.
+```
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
 
-Läs gärna:
+        Button b = findViewById(R.id.myButton);
 
-- Boulos, M.N.K., Warren, J., Gong, J. & Yue, P. (2010) Web GIS in practice VIII: HTML5 and the canvas element for interactive online mapping. International journal of health geographics 9, 14. Shin, Y. &
-- Wunsche, B.C. (2013) A smartphone-based golf simulation exercise game for supporting arthritis patients. 2013 28th International Conference of Image and Vision Computing New Zealand (IVCNZ), IEEE, pp. 459–464.
-- Wohlin, C., Runeson, P., Höst, M., Ohlsson, M.C., Regnell, B., Wesslén, A. (2012) Experimentation in Software Engineering, Berlin, Heidelberg: Springer Berlin Heidelberg.
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("==>","You clicked the button!");
+            }
+        });
+    }}
+```
+
+Ändringar i values:
+Färgerna i colors.xml ändrades.
+```
+<resources>
+    <color name="colorPrimary">#FF9800</color>
+    <color name="colorPrimaryDark">#FF5722</color>
+    <color name="colorAccent">#FFEB3B</color>
+</resources>
+```
+
+Strings lades till i strings.xml för att undvika hårdkodad text.
+```
+<resources>
+    <string name="app_name">Happy Corgi Widgets</string>
+    <string name="write_something">Write something nice here..</string>
+    <string name="happy_corgi">happy corgi</string>
+    <string name="the_button">The button</string>
+</resources>
+```
