@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">Happy Corgi Widgets</string>
     <string name="write_something">Write something nice here..</string>
+    <string name="happy_corgi">happy corgi</string>
+    <string name="the_button">The button</string>
 </resources>
