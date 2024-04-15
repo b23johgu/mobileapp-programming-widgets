@@ -74,6 +74,9 @@ setContentView(R.layout.activity_main);
     }}
 ```
 
+Screenshot av appen med alla widgets; EditText, ImageView och Button.
+[Länk till screenshot av app](screenshots/widgetapp.png)
+
 Ändringar i values:
 Färgerna i colors.xml ändrades.
 ```
